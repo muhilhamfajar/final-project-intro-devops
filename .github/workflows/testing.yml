@@ -26,4 +26,4 @@ jobs:
       - name: Testing
         run: |
           sleep 20
-          docker exec -it testing pytest testing.py
+          docker exec testing pytest testing.py
