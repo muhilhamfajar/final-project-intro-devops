@@ -32,18 +32,18 @@ class TestHomePage:
         cls.driver.quit()
         cls.display.stop()
 
-    # def test_open_page(self):
-    #     # Open homepage
-    #     self.driver.get("http://frontend:8080/")
+    def test_open_page(self):
+        # Open homepage
+        self.driver.get("http://frontend:8080/")
 
-    #     # Wait for the results page to load
-    #     time.sleep(2)
+        # Wait for the results page to load
+        time.sleep(2)
 
-    #     # Get the title of the page
-    #     page_title = self.driver.title
+        # Get the title of the page
+        page_title = self.driver.title
 
-    #     expected_title = "Tweet App" 
-    #     assert expected_title in page_title, f"Expected title '{expected_title}' not found in actual title '{page_title}'"
+        expected_title = "Tweet App" 
+        assert expected_title in page_title, f"Expected title '{expected_title}' not found in actual title '{page_title}'"
 
     def test_github_page(self):
         # Open GitHub homepage
