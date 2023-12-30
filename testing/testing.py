@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import chromedriver_autoinstaller
 from pyvirtualdisplay import Display
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 # Inisialisasi virtual display untuk menjalankan browser tanpa GUI (headless)
 display = Display(visible=0, size=(800, 800))
@@ -18,7 +19,8 @@ chrome_options = webdriver.ChromeOptions()
 # Daftar opsi yang ingin ditambahkan
 options = [
     "--window-size=1200,1200",
-    "--ignore-certificate-errors"
+    "--ignore-certificate-errors",
+    "--headless"
 ]
 
 # Menambahkan opsi-opsi ke dalam chrome_options

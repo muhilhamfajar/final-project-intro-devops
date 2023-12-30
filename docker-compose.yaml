@@ -36,8 +36,6 @@ services:
     build:
       context: ./testing
       dockerfile: Dockerfile
-    depends_on:
-      - frontend
     networks:
       - project-network
 
