@@ -1,39 +1,63 @@
+import time
+import pytest
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 import chromedriver_autoinstaller
 from pyvirtualdisplay import Display
-display = Display(visible=0, size=(800, 800))  
-display.start()
 
-chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
-                                      # and if it doesn't exist, download it automatically,
-                                      # then add chromedriver to path
+class TestHomePage:
+    @classmethod
+    def setup_class(cls):
+        # Start virtual display
+        cls.display = Display(visible=0, size=(800, 800))
+        cls.display.start()
 
-chrome_options = webdriver.ChromeOptions()    
-# Add your options as needed    
-options = [
-  # Define window size here
-   "--window-size=1200,1200",
-    "--ignore-certificate-errors"
- 
-    #"--headless",
-    #"--disable-gpu",
-    #"--window-size=1920,1200",
-    #"--ignore-certificate-errors",
-    #"--disable-extensions",
-    #"--no-sandbox",
-    #"--disable-dev-shm-usage",
-    #'--remote-debugging-port=9222'
-]
+        # Install ChromeDriver
+        chromedriver_autoinstaller.install()
 
-for option in options:
-    chrome_options.add_argument(option)
+        # Set up Chrome options
+        cls.chrome_options = webdriver.ChromeOptions()
+        cls.chrome_options.add_argument("--window-size=1200,1200")
+        cls.chrome_options.add_argument("--ignore-certificate-errors")
+        cls.chrome_options.add_argument("--headless")  # Add headless option
 
-    
-driver = webdriver.Chrome(options = chrome_options)
+        # Initialize WebDriver
+        cls.driver = webdriver.Chrome(options=cls.chrome_options)
 
-driver.get('http://github.com')
-print(driver.title)
-with open('./GitHub_Action_Results.txt', 'w') as f:
-    f.write(f"This was written with a GitHub action {driver.title}")
+    @classmethod
+    def teardown_class(cls):
+        # Close the browser and stop virtual display
+        cls.driver.quit()
+        cls.display.stop()
+
+    # def test_open_page(self):
+    #     # Open homepage
+    #     self.driver.get("http://frontend:8080/")
+
+    #     # Wait for the results page to load
+    #     time.sleep(2)
+
+    #     # Get the title of the page
+    #     page_title = self.driver.title
+
+    #     expected_title = "Tweet App" 
+    #     assert expected_title in page_title, f"Expected title '{expected_title}' not found in actual title '{page_title}'"
+
+    def test_github_page(self):
+        # Open GitHub homepage
+        self.driver.get("http://github.com")
+
+        # Wait for the results page to load
+        time.sleep(2)
+
+        # Get the title of the page
+        page_title = self.driver.title
+
+        expected_title = "The world's leading software development platform" 
+        assert expected_title in page_title, f"Expected title '{expected_title}' not found in actual title '{page_title}'"
+
+# Run the test if the script is executed directly
+if __name__ == "__main__":
+    pytest.main(["-v", "main.py"])
