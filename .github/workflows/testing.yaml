@@ -19,9 +19,12 @@ jobs:
         
        # Need to fetch reqs if needed
       - name: Installing all necessary packages
-        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay
+        run: pip install chromedriver-autoinstaller
       - name: Install xvfb
         run: sudo apt-get install xvfb
+
+      - name: Install requirement
+        run: pip install -r testing/requirements.txt
 
       - name: Running the Python script
         run: python ./testing/main.py
