@@ -29,7 +29,7 @@ class TestTweet:
     @classmethod
     def setup_class(cls):
         cls.driver = webdriver.Chrome(options=chrome_options)
-        cls.driver.get("http://localhost:8080")
+        cls.driver.get("http://frontend:8080")
 
     @classmethod
     def teardown_class(cls):
@@ -37,7 +37,7 @@ class TestTweet:
         cls.driver.quit()
   
     def test_open_homepage(self):
-        self.driver.get("http://localhost:8080/")
+        self.driver.get("http://frontend:8080/")
         self.driver.set_window_size(1223, 868)
         self.driver.find_element(By.XPATH, "//h1[contains(text(),'Home Pages')]")
    
