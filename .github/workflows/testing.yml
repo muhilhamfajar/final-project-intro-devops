@@ -10,17 +10,6 @@ jobs:
     name: Build and Testing
     runs-on: ubuntu-latest
 
-    services:
-      backend:
-        image: backend
-        ports: 
-          - 5000:5000
-
-      frontend:
-        image: frontend
-        ports: 
-          - 8080:8080
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
