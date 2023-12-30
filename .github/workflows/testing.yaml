@@ -28,4 +28,4 @@ jobs:
       - name: Testing
         run: |
           sleep 10
-          docker exec testing pytest testing.py     
+          docker exec testing pytest main.py     
