@@ -1,6 +1,7 @@
-name: scrape
+name: testing
 on:
-  workflow_dispatch:
+  pull_request:
+    branches: [ "main" ]
 jobs:
   scrape:
     runs-on: ubuntu-latest
