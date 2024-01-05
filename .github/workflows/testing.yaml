@@ -1,19 +1,31 @@
-name: Testing
-
+name: testing
 on:
   pull_request:
     branches: [ "main" ]
-
 jobs:
-
-  build-testing:
-    name: Build and Testing
+  scrape:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-    
+      - name: Checking out repo
+        uses: actions/checkout@v3
+      - name: Setting up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Installing package list
+        run: apt list --installed    
+      - name: Removing previous chrome instances on runner 
+        run: sudo apt purge google-chrome-stable  
+        
+       # Need to fetch reqs if needed
+      - name: Installing all necessary packages
+        run: pip install chromedriver-autoinstaller
+      - name: Install xvfb
+        run: sudo apt-get install xvfb
+
+      - name: Install requirement
+        run: pip install -r testing/requirements.txt
+
       - name: Install Docker Compose
         run: |
           sudo apt-get update
@@ -22,10 +34,6 @@ jobs:
       - name: Build and Run Container
         run: |
           sudo docker compose up -d
-      - name: Install requirement
-        run: |
-          pip install -r testing/requirements.txt
-      - name: Testing
-        run: |
-          sleep 10
-          docker exec testing pytest testing.py     
+
+      - name: Running the Python script
+        run: python ./testing/main.py
