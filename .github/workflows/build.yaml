@@ -34,7 +34,7 @@ jobs:
       - name: Build and push tweet-vue
         uses: docker/build-push-action@v4
         with:
-            context: ./postgres
+            context: ./vue-project
             file: ./vue-project/Dockerfile
             push: true
             tags: ${{ secrets.DOCKERHUB_USERNAME }}/vue-project:${{ github.run_number }}
