@@ -45,19 +45,6 @@ class TestHomePage:
         expected_title = "Tweet App" 
         assert expected_title in page_title, f"Expected title '{expected_title}' not found in actual title '{page_title}'"
 
-    def test_github_page(self):
-        # Open GitHub homepage
-        self.driver.get("http://github.com")
-
-        # Wait for the results page to load
-        time.sleep(2)
-
-        # Get the title of the page
-        page_title = self.driver.title
-
-        expected_title = "The world's leading software development platform" 
-        assert expected_title in page_title, f"Expected title '{expected_title}' not found in actual title '{page_title}'"
-
 # Run the test if the script is executed directly
 if __name__ == "__main__":
     pytest.main(["-v", "main.py"])
