@@ -63,7 +63,7 @@ jobs:
               docker network create project-network
               docker run -d -p 5000:5000 --network project-network --name flask-backend ${{ secrets.DOCKERHUB_USERNAME }}/flask-backend:${{ github.run_number }}
               sleep 5
-              docker run -d -p 8080:8080 --network project-network --name vue-project ${{ secrets.DOCKERHUB_USERNAME }}/vue-project:${{ github.run_number }}
+              docker run -d -p 8080:8080 --network project-network --name vue-project -e VITE_FLASK_API_BASEURL=http://103.27.206.66:5000 ${{ secrets.DOCKERHUB_USERNAME }}/vue-project:${{ github.run_number }}
       
           - name: Remove unused data
             run: |
