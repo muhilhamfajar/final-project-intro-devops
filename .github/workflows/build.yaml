@@ -41,6 +41,8 @@ jobs:
             file: ./vue-project/Dockerfile
             push: true
             tags: ${{ secrets.DOCKERHUB_USERNAME }}/vue-project:${{ github.run_number }}
+        env:
+          VITE_FLASK_API_BASEURL: ${{ env.API_BASE_URL }}
 
   deploy: 
       name: Deploy to Server
